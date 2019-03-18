@@ -94,10 +94,15 @@
         function playSound(letter) {
           let soundID = "sound" + letter.toUpperCase();
           let audio = document.getElementById(soundID);
-          // muss hier noch den data key auswählen
-          audio.classList.add("playing");
+          let test = document.querySelector(`[data-key="${letter}"]`);
+          console.log(test);
+          test.classList.add("playing");
           audio.currentTime = 0; // rewinds audio
           audio.play();
+          // remove playing style after 0.07 seconds
+          setTimeout(function() {
+            test.classList.remove("playing");
+          }, 70);
         }
       });
     </script>
