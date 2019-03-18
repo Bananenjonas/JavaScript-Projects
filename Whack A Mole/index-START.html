@@ -18,7 +18,7 @@
     <div class="hole hole2">
       <div class="mole"></div>
     </div>
-    <div class="hole hole3">
+    <div id="hole3" class="hole hole3">
       <div class="mole"></div>
     </div>
     <div class="hole hole4">
@@ -27,7 +27,7 @@
     <div class="hole hole5">
       <div class="mole"></div>
     </div>
-    <div class="up hole hole6">
+    <div class="hole hole6">
       <div class="mole"></div>
     </div>
   </div>
@@ -38,7 +38,31 @@
   const moles = document.querySelectorAll('.mole');
 
   function startGame() {
-    
+    // Dauerschleife für Erscheinen von Moles
+    let timer = setInterval(() => {
+     appear()
+    }, randomTime());
+    // Beenden von Dauerschleife nach 10 Sekunden
+    setTimeout(() => {
+    clearInterval(timer);
+    holes.forEach(element => {element.classList.remove("up")});
+    }, 10000);
+  
+  }
+
+  function appear() {
+    // removes every mole that appeared before
+    holes.forEach(element => {element.classList.remove("up")});
+    let element = document.getElementsByClassName(`hole${randomNumber()}`)[0];
+    element.classList.add("up");
+  }
+
+  function randomNumber() {
+    return Math.floor((Math.random() * 6 ) + 1);
+  }
+
+  function randomTime() {
+    return Math.floor((Math.random() * 1000 ) + 300);
   }
 
 
