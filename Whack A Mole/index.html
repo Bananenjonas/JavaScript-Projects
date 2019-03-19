@@ -37,6 +37,7 @@
   const scoreBoard = document.querySelector('.score');
   const moles = document.querySelectorAll('.mole');
   let lastHole;
+  last timeUp;
 
   // gibt zufällige Zeit zurück
  function randomTime(max, min) {
@@ -54,6 +55,17 @@
    lastHole = hole;
    return hole;
  }
+
+// Mole erscheint
+function popUp()  {
+  const time = randomTime(200, 1000);
+  const hole = randomHole(holes);
+  hole.classList.add("up");
+  setTimeout(() => {
+    hole.classList.remove("up");
+    if(!timeUp) peep();
+  }, time);
+}
 
 
 
