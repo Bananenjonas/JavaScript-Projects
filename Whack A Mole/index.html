@@ -38,6 +38,7 @@
   const moles = document.querySelectorAll('.mole');
   let lastHole;
   let timeUp;
+  let score = 0;
 
   // gibt zufällige Zeit zurück
  function randomTime(max, min) {
@@ -70,6 +71,7 @@ function popUp()  {
 function startGame() {
   // scoreboard wird auf null gesetzt, falls man nochmal spielen will
   scoreBoard.textContent = 0;
+  score = 0;
   timeUp = false;
   popUp();
   setTimeout(() => {
@@ -77,6 +79,15 @@ function startGame() {
   }, 10000);
 }
 
+function hitMole(e) {
+  if(!e.isTrusted) return; // cheater!
+  score++;
+  this.classList.remove("up");
+  scoreBoard.textContent = score;
+}
+
+// click Event zu jedem Mole hinzufügen
+moles.forEach(mole => mole.addEventListener("click", hitMole));
 
 
 </script>
