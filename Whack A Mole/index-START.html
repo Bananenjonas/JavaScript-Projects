@@ -36,34 +36,24 @@
   const holes = document.querySelectorAll('.hole');
   const scoreBoard = document.querySelector('.score');
   const moles = document.querySelectorAll('.mole');
+  let lastHole;
 
-  function startGame() {
-    // Dauerschleife für Erscheinen von Moles
-    let timer = setInterval(() => {
-     appear()
-    }, randomTime());
-    // Beenden von Dauerschleife nach 10 Sekunden
-    setTimeout(() => {
-    clearInterval(timer);
-    holes.forEach(element => {element.classList.remove("up")});
-    }, 10000);
-  
-  }
+  // gibt zufällige Zeit zurück
+ function randomTime(max, min) {
+   return Math.round(Math.random() * (max - min) + min);
+ }
 
-  function appear() {
-    // removes every mole that appeared before
-    holes.forEach(element => {element.classList.remove("up")});
-    let element = document.getElementsByClassName(`hole${randomNumber()}`)[0];
-    element.classList.add("up");
-  }
-
-  function randomNumber() {
-    return Math.floor((Math.random() * 6 ) + 1);
-  }
-
-  function randomTime() {
-    return Math.floor((Math.random() * 1000 ) + 300);
-  }
+ // wählt zufälliges Hole
+ function randomHole(holes) {
+   const index = Math.floor(Math.random() * holes.length);
+   const hole = holes[index];
+   // damit nicht zweilmal hintereinander das gleiche Hole aufgerufen wird
+   if (hole === lastHole) {
+     return randomHole(holes);
+   }
+   lastHole = hole;
+   return hole;
+ }
 
 
 
