@@ -37,7 +37,7 @@
   const scoreBoard = document.querySelector('.score');
   const moles = document.querySelectorAll('.mole');
   let lastHole;
-  last timeUp;
+  let timeUp;
 
   // gibt zufällige Zeit zurück
  function randomTime(max, min) {
@@ -63,8 +63,18 @@ function popUp()  {
   hole.classList.add("up");
   setTimeout(() => {
     hole.classList.remove("up");
-    if(!timeUp) peep();
+    if(!timeUp) popUp();
   }, time);
+}
+
+function startGame() {
+  // scoreboard wird auf null gesetzt, falls man nochmal spielen will
+  scoreBoard.textContent = 0;
+  timeUp = false;
+  popUp();
+  setTimeout(() => {
+    timeUp = true;
+  }, 10000);
 }
 
 
